@@ -1,0 +1,4 @@
+Create Table tovar (tovar varchar(20) not null primary key, ed_izm varchar(10), zena integer);
+Create Table pokupateli (pokup varchar(20) not null primary key, gorod varchar(20), adres varchar(20));
+Create Table rashod (N_rash varchar(10) not null primary key, tovar varchar(20) references tovar(tovar),
+pokup varchar(20) references pokupateli (pokup), data_rash date, kolvo integer);
