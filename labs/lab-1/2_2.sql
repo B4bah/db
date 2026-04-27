@@ -1,0 +1,2 @@
+SELECT DISTINCT CH.tabno 
+FROM children CH;

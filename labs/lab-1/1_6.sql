@@ -1,0 +1,4 @@
+SELECT E.tabno, E.e_name, E.depno, EXTRACT(YEAR FROM AGE(E.born)) as age
+FROM emp E
+WHERE EXTRACT(YEAR FROM AGE(E.born)) > 50
+ORDER BY EXTRACT(YEAR FROM AGE(E.born));

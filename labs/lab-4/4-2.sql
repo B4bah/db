@@ -1,0 +1,5 @@
+-- 4-2
+SELECT S.sname FROM S
+WHERE s.sn IN (SELECT SPJ.sn
+FROM SPJ
+WHERE SPJ.pn = 'P2');

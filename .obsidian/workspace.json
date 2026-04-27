@@ -4,16 +4,30 @@
     "type": "split",
     "children": [
       {
-        "id": "74f6f0c7f91f65c0",
+        "id": "d28888c0ce768ebc",
         "type": "tabs",
         "children": [
           {
-            "id": "69235728eee1c707",
+            "id": "328ab93aabcf8f78",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DB Course Task.md",
+                "file": "Базы данных.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Базы данных"
+            }
+          },
+          {
+            "id": "a16638b6a8d6618d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "course-task/DB Course Task.md",
                 "mode": "source",
                 "source": false
               },
@@ -183,10 +197,21 @@
       "bases:Create new base": false
     }
   },
-  "active": "69235728eee1c707",
+  "active": "328ab93aabcf8f78",
   "lastOpenFiles": [
-    "course-task/pdf/course-task-Page-3.drawio.pdf",
+    "labs/training/insert_tables.txt",
+    "labs/training/create_tables.txt",
+    "labs/training/30-03-2026_9.sql",
+    "labs/training/30-03-2026_8.sql",
+    "labs/training/30-03-2026_7.sql",
+    "labs/training/30-03-2026_6.sql",
+    "labs/training/30-03-2026_5.sql",
+    "labs/training/30-03-2026_4.sql",
+    "labs/training/30-03-2026_3.sql",
+    "labs/training/30-03-2026_2.sql",
+    "labs/training/30-03-2026_1.sql",
+    "course-task/DB Course Task.md",
     "Базы данных.md",
-    "DB Course Task.md"
+    "course-task/course-task.jpg"
   ]
 }

@@ -1,0 +1,1 @@
+SELECT pokup, MIN(kolvo) as min FROM rashod GROUP BY pokup HAVING MIN(kolvo) >= 100;
