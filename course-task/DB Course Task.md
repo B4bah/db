@@ -1,24 +1,29 @@
-**PERSON** (`id`, full_name, birth_date, address)
+**PK**:    ~={red}PK=~
+**PK, FK**:    ~={red}PK, FK=~ ~={orange}{TABLE_NAME(column)}=~
+**FK**:    ~={blue}FK=~ ~={orange}{TABLE_NAME(column)}=~
 
-**CLIENT** (`id`, ==person_id=={PERSON(id)})
-**EMPLOYEE** (`id`, ==person_id=={PERSON(id)}, salary, date_of_employment, date_of_disemployment)
 
-**MANAGER** (`id`{EMPLOYEE(id)}, date_of_appointment)
-**MECHANIC** (`id`EMPLOYEE(id)}, specialty, rank)
+**PERSON** (~={red}id=~, full_name, birth_date, city, district, street, building, flat_number)
 
-**AUTO_REPAIR_SHOP** (`Name`, ==manager_id=={MANAGER(id}, address)
-**AUTO_REPAIR_SHOP_BRANCH** ()
-**VEHICLE** (`VIN`, ==owner_ID=={PERSON(id)}, model, ==maker=={MACHINERY_COMPANY(Name)})
-**MACHINERY_COMPANY** (`Name`, address)
-**DETAIL** (`id`, ==maker=={MACHINERY_COMPANY(Name)}, name, quantity)
-**DETAIL_AUTO_REPAIR_SHOP**(`id`, ==global_id=={DETAIL(id)}, quantity)
-**DETAIL_STORAGE** (`detail_id`{DETAIL_AUTO_REPAIR_SHOP(id)}, quantity)
+**CLIENT** (~={red}id=~, ~={blue}person_id=~ ~={orange}{PERSON(id)}=~)
+**EMPLOYEE** (~={red}id=~, ~={red}person_id=~ ~={orange}{PERSON(id)}=~, salary, date_of_employment, date_of_disemployment)
 
-**REQUEST** (`id`, `auto_repair_shop_name`{AUTO_REPAIR_SHOP(Name)}, ==VIN=={VEHICLE(VIN)}, request_date)
-**WORK** (`auto_repair_shop_name`{AUTO_REPAIR_SHOP(Name)}, `request_id`{REQUEST(id)}, date_of_assignment)
-**SERVICE** (`id`, ==work_id=={WORK(id)}, name)
-**EXECUTION** (`master_id`{MECHANIC(id)}, `service_id`{SERVICE(id)})
-**DETAIL_USAGE** (`detail_id`{DETAIL_AUTO_SERVICE(id)}, `service_id`{SERVICE(id)}, quantity)
+**MANAGER** (~={red}id=~ ~={orange}{EMPLOYEE(id)}=~, date_of_appointment)
+**MECHANIC** (~={red}id=~ ~={orange}{EMPLOYEE(id)}=~, specialty, rank)
 
-**DETAIL_ORDER** (`id`, ==auto_repair_shop_name=={AUTO_REPAIR_SHOP(Name)}, ==detail_id=={DETAIL(id)}, quantity)
+**AUTO_REPAIR_SHOP** (~={red}name=~, ~={blue}manager_id=~ ~={orange}{MANAGER(id}=~)
+**AUTO_REPAIR_SHOP_BRANCH** (~={red}shop_name=~ ~={orange}{AUTO_REPAIR_SHOP(name)}=~, city, district, street, building)
+**VEHICLE** (~={red}VIN=~, ~={blue}owner_ID=~ ~={orange}{PERSON(id)}=~, model, ~={blue}maker=~ ~={orange}{MACHINERY_COMPANY(name)}=~)
+**MACHINERY_COMPANY** (~={red}name=~, city, district, street, building)
+**DETAIL** (~={red}id=~, ~={blue}maker=~ ~={orange}{MACHINERY_COMPANY(name)}=~, name, quantity)
+**DETAIL_AUTO_REPAIR_SHOP**(~={red}id=~, ~={blue}global_id=~ ~={orange}{DETAIL(id)}=~, quantity)
+**DETAIL_STORAGE** (~={red}detail_id=~ ~={orange}{DETAIL_AUTO_REPAIR_SHOP(id)}=~, quantity)
+
+**REQUEST** (~={red}id=~, ~={red}auto_repair_shop_name=~ ~={orange}{AUTO_REPAIR_SHOP(name)}=~, ~={blue}VIN=~ ~={orange}{VEHICLE(VIN)}=~, request_date)
+**WORK** (~={red}auto_repair_shop_name=~ ~={orange}{AUTO_REPAIR_SHOP(name)}=~, ~={red}request_id=~ ~={orange}{REQUEST(id)}=~, date_of_assignment)
+**SERVICE** (~={red}id=~, ~={blue}work_id=~ ~={orange}{WORK(id)}=~, name)
+**EXECUTION** (~={red}master_id=~ ~={orange}{MECHANIC(id)}=~, ~={red}service_id=~ ~={orange}{SERVICE(id)}=~)
+**DETAIL_USAGE** (~={red}detail_id=~ ~={orange}{DETAIL_AUTO_SERVICE(id)}=~, ~={red}service_id=~ ~={orange}{SERVICE(id)}=~, quantity)
+
+**DETAIL_ORDER** (~={red}id=~, ~={blue}auto_reir_shop_name=~ ~={orange}{AUTO_REPAIR_SHOP(name)}=~, ~={blue}detail_id=~ ~={orange}{DETAIL(id)}=~, quantity)
 
