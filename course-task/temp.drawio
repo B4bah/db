@@ -1,0 +1,484 @@
+<mxfile host="app.diagrams.net" modified="2026-05-04T00:00:00.000Z" agent="manual" version="24.0.0">
+  <diagram name="EERD" id="eer-diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Сущность PERSON -->
+        <mxCell id="PERSON" value="&lt;b&gt;PERSON&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;full_name&lt;br&gt;birth_date&lt;br&gt;city&lt;br&gt;district&lt;br&gt;street&lt;br&gt;building&lt;br&gt;flat_number" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="220" y="40" width="140" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- CLIENT -->
+        <mxCell id="CLIENT" value="&lt;b&gt;CLIENT&lt;/b&gt;&lt;hr&gt;id&lt;br&gt;&lt;i&gt;person_id (FK)&lt;/i&gt;&lt;br&gt;registration_date" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- EMPLOYEE -->
+        <mxCell id="EMPLOYEE" value="&lt;b&gt;EMPLOYEE&lt;/b&gt;&lt;hr&gt;id&lt;br&gt;&lt;i&gt;person_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;branch_id (FK)&lt;/i&gt;&lt;br&gt;salary&lt;br&gt;date_of_employment&lt;br&gt;date_of_disemployment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="430" y="240" width="160" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- MECHANIC -->
+        <mxCell id="MECHANIC" value="&lt;b&gt;MECHANIC&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id (FK)&lt;/u&gt;&lt;br&gt;specialty&lt;br&gt;rank" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="400" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- MACHINERY_COMPANY -->
+        <mxCell id="MACHINERY_COMPANY" value="&lt;b&gt;MACHINERY_COMPANY&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;name" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="40" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- VEHICLE_MODEL -->
+        <mxCell id="VEHICLE_MODEL" value="&lt;b&gt;VEHICLE_MODEL&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;company_id (FK)&lt;/i&gt;&lt;br&gt;name" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="140" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- VEHICLE -->
+        <mxCell id="VEHICLE" value="&lt;b&gt;VEHICLE&lt;/b&gt;&lt;hr&gt;&lt;u&gt;VIN&lt;/u&gt;&lt;br&gt;&lt;i&gt;owner_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;model_id (FK)&lt;/i&gt;&lt;br&gt;year&lt;br&gt;license_plate" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="260" width="150" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- AUTO_REPAIR_SHOP -->
+        <mxCell id="AUTO_REPAIR_SHOP" value="&lt;b&gt;AUTO_REPAIR_SHOP&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;name" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="860" y="40" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- AUTO_REPAIR_SHOP_BRANCH -->
+        <mxCell id="AUTO_REPAIR_SHOP_BRANCH" value="&lt;b&gt;AUTO_REPAIR_SHOP_BRANCH&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;shop_id (FK)&lt;/i&gt;&lt;br&gt;branch_number&lt;br&gt;&lt;i&gt;manager_id (FK)&lt;/i&gt;&lt;br&gt;city&lt;br&gt;district&lt;br&gt;street&lt;br&gt;building" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="860" y="160" width="170" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- SUPPLIER -->
+        <mxCell id="SUPPLIER" value="&lt;b&gt;SUPPLIER&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;name&lt;br&gt;contact_phone" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="560" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- DETAIL -->
+        <mxCell id="DETAIL" value="&lt;b&gt;DETAIL&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;part_number&lt;br&gt;name&lt;br&gt;description" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="240" y="560" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- DETAIL_SUPPLIER -->
+        <mxCell id="DETAIL_SUPPLIER" value="&lt;b&gt;DETAIL_SUPPLIER&lt;/b&gt;&lt;hr&gt;&lt;u&gt;detail_id (FK)&lt;/u&gt;&lt;br&gt;&lt;u&gt;supplier_id (FK)&lt;/u&gt;&lt;br&gt;unit_price&lt;br&gt;is_original" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="180" y="680" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- DETAIL_COMPATIBILITY -->
+        <mxCell id="DETAIL_COMPATIBILITY" value="&lt;b&gt;DETAIL_COMPATIBILITY&lt;/b&gt;&lt;hr&gt;&lt;u&gt;detail_id (FK)&lt;/u&gt;&lt;br&gt;&lt;u&gt;model_id (FK)&lt;/u&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="440" y="560" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- INVENTORY -->
+        <mxCell id="INVENTORY" value="&lt;b&gt;INVENTORY&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;branch_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;detail_id (FK)&lt;/i&gt;&lt;br&gt;quantity" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="680" y="450" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- REQUEST -->
+        <mxCell id="REQUEST" value="&lt;b&gt;REQUEST&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;client_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;branch_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;VIN (FK)&lt;/i&gt;&lt;br&gt;request_date&lt;br&gt;status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="240" y="380" width="150" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- WORK_ORDER -->
+        <mxCell id="WORK_ORDER" value="&lt;b&gt;WORK_ORDER&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;request_id (FK)&lt;/i&gt;&lt;br&gt;date_of_assignment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- SERVICE -->
+        <mxCell id="SERVICE" value="&lt;b&gt;SERVICE&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;work_order_id (FK)&lt;/i&gt;&lt;br&gt;name" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="240" y="530" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- EXECUTION -->
+        <mxCell id="EXECUTION" value="&lt;b&gt;EXECUTION&lt;/b&gt;&lt;hr&gt;&lt;u&gt;mechanic_id (FK)&lt;/u&gt;&lt;br&gt;&lt;u&gt;service_id (FK)&lt;/u&gt;&lt;br&gt;date_start&lt;br&gt;date_end" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="520" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- DETAIL_USAGE -->
+        <mxCell id="DETAIL_USAGE" value="&lt;b&gt;DETAIL_USAGE&lt;/b&gt;&lt;hr&gt;&lt;u&gt;service_id (FK)&lt;/u&gt;&lt;br&gt;&lt;u&gt;inventory_id (FK)&lt;/u&gt;&lt;br&gt;quantity" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="680" y="560" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- DETAIL_ORDER -->
+        <mxCell id="DETAIL_ORDER" value="&lt;b&gt;DETAIL_ORDER&lt;/b&gt;&lt;hr&gt;&lt;u&gt;id&lt;/u&gt;&lt;br&gt;&lt;i&gt;branch_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;supplier_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;detail_id (FK)&lt;/i&gt;&lt;br&gt;quantity&lt;br&gt;order_date&lt;br&gt;status" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="860" y="450" width="150" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- ========== СВЯЗИ ========== -->
+
+        <!-- Иерархия PERSON -> CLIENT (обобщение) -->
+        <mxCell id="gen_PERSON_CLIENT" value="" style="endArrow=block;endFill=0;html=1;startArrow=none;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="PERSON" target="CLIENT">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="255" y="180" as="sourcePoint" />
+            <mxPoint x="115" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gen_PERSON_CLIENT_label" value="⊆" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="150" y="195" width="20" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Иерархия PERSON -> EMPLOYEE (обобщение) -->
+        <mxCell id="gen_PERSON_EMPLOYEE" value="" style="endArrow=block;endFill=0;html=1;startArrow=none;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="PERSON" target="EMPLOYEE">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="325" y="180" as="sourcePoint" />
+            <mxPoint x="510" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gen_PERSON_EMPLOYEE_label" value="⊆" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="430" y="195" width="20" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Иерархия EMPLOYEE -> MECHANIC -->
+        <mxCell id="gen_EMPLOYEE_MECHANIC" value="" style="endArrow=block;endFill=0;html=1;startArrow=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="EMPLOYEE" target="MECHANIC">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="350" as="sourcePoint" />
+            <mxPoint x="525" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gen_EMPLOYEE_MECHANIC_label" value="⊆" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="505" y="360" width="20" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- PERSON 1 to 0..1 CLIENT (дополнительная FK-связь) -->
+        <mxCell id="fk_PERSON_CLIENT" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERzeroToOne;startArrow=ERmandOne;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="PERSON" target="CLIENT">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="210" y="110" as="sourcePoint" />
+            <mxPoint x="190" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_PERSON_CLIENT_label" value="person_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_PERSON_CLIENT">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PERSON 1 to 0..1 EMPLOYEE (FK person_id) -->
+        <mxCell id="fk_PERSON_EMPLOYEE" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERzeroToOne;startArrow=ERmandOne;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="PERSON" target="EMPLOYEE">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="370" y="100" as="sourcePoint" />
+            <mxPoint x="430" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_PERSON_EMPLOYEE_label" value="person_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_PERSON_EMPLOYEE">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- VEHICLE (owner_id) -> PERSON (1:N) -->
+        <mxCell id="fk_VEHICLE_PERSON" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.2;strokeColor=#cc0000;" edge="1" parent="1" source="VEHICLE" target="PERSON">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="640" y="300" as="sourcePoint" />
+            <mxPoint x="360" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_VEHICLE_PERSON_label" value="owner_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_VEHICLE_PERSON">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- VEHICLE (model_id) -> VEHICLE_MODEL (1:N) -->
+        <mxCell id="fk_VEHICLE_MODEL" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="VEHICLE" target="VEHICLE_MODEL">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="715" y="260" as="sourcePoint" />
+            <mxPoint x="715" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_VEHICLE_MODEL_label" value="model_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_VEHICLE_MODEL">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- VEHICLE_MODEL -> MACHINERY_COMPANY (N:1) -->
+        <mxCell id="fk_MODEL_COMPANY" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="VEHICLE_MODEL" target="MACHINERY_COMPANY">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="715" y="140" as="sourcePoint" />
+            <mxPoint x="715" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_MODEL_COMPANY_label" value="company_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_MODEL_COMPANY">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AUTO_REPAIR_SHOP -> AUTO_REPAIR_SHOP_BRANCH (1:N) -->
+        <mxCell id="fk_SHOP_BRANCH" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#cc0000;" edge="1" parent="1" source="AUTO_REPAIR_SHOP" target="AUTO_REPAIR_SHOP_BRANCH">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="935" y="100" as="sourcePoint" />
+            <mxPoint x="945" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_SHOP_BRANCH_label" value="shop_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_SHOP_BRANCH">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AUTO_REPAIR_SHOP_BRANCH (manager_id) -> EMPLOYEE (1:0..1) -->
+        <mxCell id="fk_BRANCH_MANAGER" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERzeroToOne;startArrow=ERmandOne;exitX=0;exitY=0.3;entryX=1;entryY=0.2;strokeColor=#cc0000;" edge="1" parent="1" source="AUTO_REPAIR_SHOP_BRANCH" target="EMPLOYEE">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="860" y="200" as="sourcePoint" />
+            <mxPoint x="590" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_BRANCH_MANAGER_label" value="manager_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_BRANCH_MANAGER">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AUTO_REPAIR_SHOP_BRANCH -> EMPLOYEE (branch_id) (1:N) -->
+        <mxCell id="fk_BRANCH_EMPLOYEE" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;exitX=0.5;exitY=0.8;entryX=1;entryY=0.8;strokeColor=#cc0000;" edge="1" parent="1" source="AUTO_REPAIR_SHOP_BRANCH" target="EMPLOYEE">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="860" y="260" as="sourcePoint" />
+            <mxPoint x="590" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_BRANCH_EMPLOYEE_label" value="branch_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_BRANCH_EMPLOYEE">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- REQUEST -> CLIENT (client_id) N:1 -->
+        <mxCell id="fk_REQUEST_CLIENT" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="REQUEST" target="CLIENT">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="240" y="430" as="sourcePoint" />
+            <mxPoint x="190" y="275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_REQUEST_CLIENT_label" value="client_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_REQUEST_CLIENT">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- REQUEST -> AUTO_REPAIR_SHOP_BRANCH (branch_id) N:1 -->
+        <mxCell id="fk_REQUEST_BRANCH" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="REQUEST" target="AUTO_REPAIR_SHOP_BRANCH">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="390" y="430" as="sourcePoint" />
+            <mxPoint x="860" y="225" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_REQUEST_BRANCH_label" value="branch_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_REQUEST_BRANCH">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- REQUEST -> VEHICLE (VIN) N:1 -->
+        <mxCell id="fk_REQUEST_VEHICLE" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="REQUEST" target="VEHICLE">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="315" y="380" as="sourcePoint" />
+            <mxPoint x="715" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_REQUEST_VEHICLE_label" value="VIN" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_REQUEST_VEHICLE">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- WORK_ORDER -> REQUEST (request_id) N:1 -->
+        <mxCell id="fk_WORK_REQUEST" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="WORK_ORDER" target="REQUEST">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="190" y="435" as="sourcePoint" />
+            <mxPoint x="240" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_WORK_REQUEST_label" value="request_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_WORK_REQUEST">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- SERVICE -> WORK_ORDER (work_order_id) N:1 -->
+        <mxCell id="fk_SERVICE_WORK" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="SERVICE" target="WORK_ORDER">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="240" y="565" as="sourcePoint" />
+            <mxPoint x="190" y="435" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_SERVICE_WORK_label" value="work_order_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_SERVICE_WORK">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- EXECUTION -> MECHANIC (mechanic_id) N:1 -->
+        <mxCell id="fk_EXEC_MECHANIC" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="EXECUTION" target="MECHANIC">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="540" y="520" as="sourcePoint" />
+            <mxPoint x="525" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_EXEC_MECHANIC_label" value="mechanic_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_EXEC_MECHANIC">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- EXECUTION -> SERVICE (service_id) N:1 -->
+        <mxCell id="fk_EXEC_SERVICE" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="EXECUTION" target="SERVICE">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="460" y="560" as="sourcePoint" />
+            <mxPoint x="380" y="565" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_EXEC_SERVICE_label" value="service_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_EXEC_SERVICE">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_USAGE -> SERVICE (service_id) N:1 -->
+        <mxCell id="fk_USAGE_SERVICE" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_USAGE" target="SERVICE">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="680" y="595" as="sourcePoint" />
+            <mxPoint x="380" y="565" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_USAGE_SERVICE_label" value="service_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_USAGE_SERVICE">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_USAGE -> INVENTORY (inventory_id) N:1 -->
+        <mxCell id="fk_USAGE_INVENTORY" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_USAGE" target="INVENTORY">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="760" y="560" as="sourcePoint" />
+            <mxPoint x="755" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_USAGE_INVENTORY_label" value="inventory_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_USAGE_INVENTORY">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- INVENTORY -> AUTO_REPAIR_SHOP_BRANCH (branch_id) N:1 -->
+        <mxCell id="fk_INV_BRANCH" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=1;exitY=0.5;entryX=0.5;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="INVENTORY" target="AUTO_REPAIR_SHOP_BRANCH">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="830" y="490" as="sourcePoint" />
+            <mxPoint x="945" y="225" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_INV_BRANCH_label" value="branch_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_INV_BRANCH">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- INVENTORY -> DETAIL (detail_id) N:1 -->
+        <mxCell id="fk_INV_DETAIL" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="INVENTORY" target="DETAIL">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="680" y="490" as="sourcePoint" />
+            <mxPoint x="370" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_INV_DETAIL_label" value="detail_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_INV_DETAIL">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_SUPPLIER -> DETAIL (detail_id) N:1 -->
+        <mxCell id="fk_DS_DETAIL" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_SUPPLIER" target="DETAIL">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="255" y="680" as="sourcePoint" />
+            <mxPoint x="305" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DS_DETAIL_label" value="detail_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DS_DETAIL">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_SUPPLIER -> SUPPLIER (supplier_id) N:1 -->
+        <mxCell id="fk_DS_SUPPLIER" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_SUPPLIER" target="SUPPLIER">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="180" y="720" as="sourcePoint" />
+            <mxPoint x="170" y="595" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DS_SUPPLIER_label" value="supplier_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DS_SUPPLIER">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_COMPATIBILITY -> DETAIL (detail_id) N:1 -->
+        <mxCell id="fk_DC_DETAIL" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_COMPATIBILITY" target="DETAIL">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="440" y="590" as="sourcePoint" />
+            <mxPoint x="370" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DC_DETAIL_label" value="detail_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DC_DETAIL">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_COMPATIBILITY -> VEHICLE_MODEL (model_id) N:1 -->
+        <mxCell id="fk_DC_MODEL" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_COMPATIBILITY" target="VEHICLE_MODEL">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="520" y="560" as="sourcePoint" />
+            <mxPoint x="715" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DC_MODEL_label" value="model_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DC_MODEL">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_ORDER -> AUTO_REPAIR_SHOP_BRANCH (branch_id) N:1 -->
+        <mxCell id="fk_DO_BRANCH" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.5;exitY=0;entryX=1;entryY=0.5;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_ORDER" target="AUTO_REPAIR_SHOP_BRANCH">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="935" y="450" as="sourcePoint" />
+            <mxPoint x="1030" y="225" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DO_BRANCH_label" value="branch_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DO_BRANCH">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_ORDER -> SUPPLIER (supplier_id) N:1 -->
+        <mxCell id="fk_DO_SUPPLIER" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0;exitY=0.5;entryX=1;entryY=0.8;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_ORDER" target="SUPPLIER">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="860" y="505" as="sourcePoint" />
+            <mxPoint x="170" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DO_SUPPLIER_label" value="supplier_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DO_SUPPLIER">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DETAIL_ORDER -> DETAIL (detail_id) N:1 -->
+        <mxCell id="fk_DO_DETAIL" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=10;html=1;endArrow=ERmandOne;startArrow=ERzeroToMany;exitX=0.3;exitY=1;entryX=1;entryY=0.2;strokeColor=#cc0000;" edge="1" parent="1" source="DETAIL_ORDER" target="DETAIL">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="905" y="560" as="sourcePoint" />
+            <mxPoint x="370" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk_DO_DETAIL_label" value="detail_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#cc0000;backgroundColor=#ffffff;" vertex="1" connectable="0" parent="fk_DO_DETAIL">
+          <mxGeometry x="-20" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
