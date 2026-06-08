@@ -1,70 +1,589 @@
--- Set the primary schema as car_service
-SET search_path TO car_service;
+-- ============================================================
+--  AUTO REPAIR SHOP — TEST DATA
+--  Database: PostgreSQL
+-- ============================================================
 
--- PERSONS
-INSERT INTO person VALUES
-('1001','Ivanov','Ivan','Ivanovich','1990-05-10','Moscow','Lenina','10','5'),
-('1002','Petrov','Petr',NULL,'1985-03-22','Moscow','Tverskaya','15','12'),
-('1003','Sidorov','Alex',NULL,'1995-07-11','Kazan','Central','7','2'),
-('1004','Smirnov','Dmitry',NULL,'1988-02-01','SPB','Nevsky','21','3'),
-('1005','Volkov','Sergey',NULL,'1992-09-09','SPB','Liteiny','8','1');
+-- ---------------- SCHEMA ----------------
+SET search_path TO public;
 
--- CLIENTS
-INSERT INTO client VALUES ('1001'), ('1002'), ('1004');
+-- ---------------- DELETING PREVIOUS DATA ----------------
+TRUNCATE TABLE 
+    auto_repair_shop,
+    auto_repair_shop_branch,
+    branch_budget,
+    client,
+    detail,
+    detail_compatibility,
+    detail_order,
+    detail_supplier,
+    detail_usage,
+    employee,
+    execution,
+    inventory,
+    invoice,
+    machinery_company,
+    mechanic,
+    payment,
+    person,
+    request,
+    service,
+    supplier,
+    vehicle,
+    vehicle_model,
+    work_order
+RESTART IDENTITY CASCADE;
 
--- COMPANY + MODELS
-INSERT INTO machinery_company (name) VALUES ('Toyota'), ('BMW');
+-- ============================================================
+--  INDEPENDENT TABLES
+-- ============================================================
 
-INSERT INTO vehicle_model (company_id, name) VALUES
-(1, 'Camry'),
-(2, 'X5');
+INSERT INTO person (id, last_name, first_name, middle_name, birth_date, city, district, street, building, flat_number) VALUES
+('12345678901', 'Петров',   'Иван',    'Сергеевич',   '1985-03-12', 'Москва',          'Центральный',      'Ленина',     '14', '42'),
+('23456789012', 'Сидорова', 'Мария',   'Алексеевна',  '1990-07-24', 'Москва',          'Центральный',      'Ленина',     '14', '43'),
+('34567890123', 'Козлов',   'Алексей', 'Иванович',    '1978-11-05', 'Москва',          'Северный',         'Мира',       '7',  '15'),
+('45678901234', 'Волков',   'Дмитрий', 'Павлович',    '1992-04-18', 'Москва',          'Центральный',      'Советская',  '3',  '8' ),
+('56789012345', 'Иванов',   'Сергей',  'Михайлович',  '1988-09-30', 'Москва',          'Центральный',      'Гагарина',   '21', '5' ),
+('67890123456', 'Смирнова', 'Анна',    'Дмитриевна',  '1995-01-14', 'Москва',          'Восточный',        'Пушкина',    '9',  '31'),
+('78901234567', 'Кузнецов', 'Павел',   'Андреевич',   '1983-06-22', 'Москва',          'Южный',            'Садовая',    '18', '2' ),
+('89012345678', 'Попова',   'Елена',   'Николаевна',  '1991-12-03', 'Москва',          'Западный',         'Лесная',     '5',  '17'),
+('90123456789', 'Соколов',  'Михаил',  'Юрьевич',     '1979-08-17', 'Москва',          'Северный',         'Речная',     '33', '90'),
+('01234567890', 'Лебедева', 'Ольга',   'Сергеевна',   '1987-02-28', 'Москва',          'Центральный',      'Кирова',     '11', '4' ),
+('11234567890', 'Козлов',   'Андрей',  'Викторович',  '1994-05-09', 'Москва',          'Восточный',        'Победы',     '26', '55'),
+('22345678901', 'Новикова', 'Татьяна', 'Ивановна',    '1986-10-11', 'Москва',          'Южный',            'Молодёжная', '8',  '12'),
+('33456789012', 'Морозов',  'Николай', 'Александрович','1975-03-25', 'Санкт-Петербург', 'Василеостровский', 'Большой',    '45', '3' ),
+('44567890123', 'Волкова',  'Юлия',    'Сергеевна',   '1998-07-07', 'Москва',          'Северный',         'Зелёная',    '2',  '28'),
+('55678901234', 'Зайцев',   'Виктор',  'Олегович',    '1989-11-19', 'Санкт-Петербург', 'Василеостровский', 'Малый',      '12', '7' );
 
--- VEHICLES (6 cars)
-INSERT INTO vehicle VALUES
-('VIN1','1001',1,2015,'A111AA'),
-('VIN2','1002',2,2018,'B222BB'),
-('VIN3','1001',1,2017,'C333CC'),
-('VIN4','1004',2,2016,'D444DD'),
-('VIN5','1001',1,2019,'E555EE'),
-('VIN6','1002',2,2020,'F666FF');
+INSERT INTO machinery_company (id, name) VALUES
+(1, 'Toyota'),
+(2, 'BMW'),
+(3, 'Mercedes-Benz'),
+(4, 'Ford'),
+(5, 'Tesla');
 
--- SUPPLIERS
-INSERT INTO supplier (name) VALUES ('AutoParts'), ('MegaParts');
+INSERT INTO supplier (id, name, contact_phone) VALUES
+(1, 'Bosch',              '+74951234567'),
+(2, 'Febi Bilstein',      '+74952345678'),
+(3, 'Brembo',             '+74953456789'),
+(4, 'Denso',              '+74954567890'),
+(5, 'Tesla Parts Direct', '+74955678901');
 
--- DETAILS
-INSERT INTO detail (article, name) VALUES
-('ENG-1','Engine'),
-('BRK-1','Brake Pads');
+INSERT INTO detail (id, part_number, name, description) VALUES
+(1,  'BSD001',    'Тормозной диск передний',      'Вентилируемый, диаметр 280мм'),
+(2,  'BPD001',    'Тормозные колодки передние',   'Комплект 4 шт'),
+(3,  'OLF001',    'Масляный фильтр',              'Резьбовой, 3/4-16 UNF'),
+(4,  'ARF001',    'Воздушный фильтр',             'Панельный'),
+(5,  'SPK001',    'Свечи зажигания',              'Иридиевые, комплект 4 шт'),
+(6,  'SHK001',    'Амортизатор передний',         'Газомасляный'),
+(7,  'WBR001',    'Ступичный подшипник',           'Передний, двухрядный'),
+(8,  'TBL001',    'Ремень ГРМ',                   'Зубчатый, 130 зубьев'),
+(9,  'TSLBR001',  'Тормозной диск Tesla',         'Оригинальный, вентилируемый'),
+(10, 'TSLBAT001', 'Модуль батареи (диагностика)', 'Оригинальный модуль 12В');
 
--- COMPATIBILITY
-INSERT INTO detail_compatibility VALUES
-(1,1), -- engine → Camry
-(2,1),
-(2,2);
+INSERT INTO auto_repair_shop (id, name) VALUES
+(1, 'АвтоФикс'),
+(2, 'МастерСервис');
 
--- SUPPLIER LINKS
-INSERT INTO detail_supplier VALUES
-(1,1,50000,TRUE),
-(2,1,3000,FALSE);
 
--- SHOP + BRANCH
-INSERT INTO auto_repair_shop (name) VALUES ('FixIt');
+-- ============================================================
+--  VEHICLE MODELS & VEHICLES
+-- ============================================================
 
-INSERT INTO auto_repair_shop_branch (shop_id, branch_number, city, street, building)
-VALUES (1,1,'Moscow','Lenina','1');
+INSERT INTO vehicle_model (id, company_id, name) VALUES
+(1, 1, 'Camry'),
+(2, 1, 'Corolla'),
+(3, 2, '3 Series'),
+(4, 2, 'X5'),
+(5, 3, 'C-Class'),
+(6, 4, 'Focus'),
+(7, 5, 'Model X'),
+(8, 5, 'Model 3');
 
--- EMPLOYEE + MECHANIC
-INSERT INTO employee (person_id, branch_id, salary, hire_date)
-VALUES ('1003',1,60000,'2020-01-01');
+INSERT INTO vehicle (VIN, owner_id, model_id, year, license_plate) VALUES
+('1HGBH41JXMN109186', '12345678901', 1, 2020, 'А123ВС77'),  -- Иван,    Toyota Camry
+('2T1BURHE0JC043821', '67890123456', 3, 2019, 'В456ГД77'),  -- Анна,    BMW 3 Series
+('1FADP3F28DL235478', '78901234567', 6, 2018, 'Е789ЖЗ77'),  -- Павел,   Ford Focus
+('WDDGF4HB8CA578432', '89012345678', 5, 2021, 'К012МН77'),  -- Елена,   Mercedes C-Class
+('2T1KR32E15C403203', '90123456789', 2, 2017, 'Р345СТ77'),  -- Михаил,  Toyota Corolla
+('WBANU31060CT03510', '01234567890', 4, 2022, 'У678ФХ77'),  -- Ольга,   BMW X5
+('5YJXCAE26GF012345', '11234567890', 7, 2021, 'Х901ЦЧ77'),  -- Андрей,  Tesla Model X
+('4T1BF3EK7AU128828', '22345678901', 1, 2019, 'Ш234ЩЪ77'),  -- Татьяна, Toyota Camry
+('1FAFP34N67W200907', '33456789012', 6, 2018, 'Ы567ЬЭ78'),  -- Николай, Ford Focus
+('5YJ3E1EA8JF006789', '44567890123', 8, 2023, 'Ю890ЯА77');  -- Юлия,    Tesla Model 3
 
-INSERT INTO mechanic VALUES (1,'Engine repair',5);
 
--- SET MANAGER (valid)
-UPDATE auto_repair_shop_branch
-SET manager_id = 1
-WHERE id = 1;
+-- ============================================================
+--  DETAIL COMPATIBILITY
+-- ============================================================
 
--- INVENTORY
+INSERT INTO detail_compatibility (detail_id, model_id) VALUES
+-- BSD001 (тормозной диск) — все кроме Tesla
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6),
+-- BPD001 (тормозные колодки) — все кроме Tesla
+(2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6),
+-- OLF001 (масляный фильтр) — бензиновые (Toyota, BMW 3 Series, Ford)
+(3, 1), (3, 2), (3, 3), (3, 6),
+-- ARF001 (воздушный фильтр) — все кроме Tesla
+(4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6),
+-- SPK001 (свечи) — только бензиновые
+(5, 1), (5, 2), (5, 3), (5, 6),
+-- SHK001 (амортизатор) — все кроме BMW X5 и Tesla
+(6, 1), (6, 2), (6, 3), (6, 5), (6, 6),
+-- WBR001 (ступичный подшипник) — все кроме Tesla
+(7, 1), (7, 2), (7, 3), (7, 4), (7, 5), (7, 6),
+-- TBL001 (ремень ГРМ) — только некоторые бензиновые
+(8, 1), (8, 2), (8, 6),
+-- TSLBR001 (тормозной диск Tesla) — только Tesla
+(9, 7), (9, 8),
+-- TSLBAT001 (модуль батареи) — только Tesla
+(10, 7), (10, 8);
+
+
+-- ============================================================
+--  DETAIL SUPPLIER
+-- ============================================================
+
+INSERT INTO detail_supplier (detail_id, supplier_id, unit_price, is_original) VALUES
+(1,  1,  5000.00, false),  -- диск         ← Bosch
+(1,  3,  7000.00, false),  -- диск         ← Brembo
+(2,  1,  2500.00, false),  -- колодки      ← Bosch
+(2,  3,  4000.00, false),  -- колодки      ← Brembo
+(3,  1,   800.00, false),  -- масл. фильтр ← Bosch
+(3,  4,   600.00, false),  -- масл. фильтр ← Denso
+(4,  1,  1200.00, false),  -- возд. фильтр ← Bosch
+(4,  2,   900.00, false),  -- возд. фильтр ← Febi
+(5,  4,  1800.00, false),  -- свечи        ← Denso
+(5,  1,  2200.00, false),  -- свечи        ← Bosch
+(6,  2,  8000.00, false),  -- амортизатор  ← Febi
+(7,  2,  3500.00, false),  -- подшипник    ← Febi
+(7,  1,  4000.00, false),  -- подшипник    ← Bosch
+(8,  2,  2800.00, false),  -- ремень ГРМ   ← Febi
+(9,  5, 15000.00, true ),  -- Tesla диск   ← Tesla Parts Direct
+(10, 5, 50000.00, true );  -- Tesla батар. ← Tesla Parts Direct
+
+
+-- ============================================================
+--  BRANCHES (без manager_id — добавим после employee)
+-- ============================================================
+
+INSERT INTO auto_repair_shop_branch (id, shop_id, branch_number, city, district, street, building) VALUES
+(1, 1, 1, 'Москва',          'Центральный',      'Ленина',  '5' ),
+(2, 1, 2, 'Москва',          'Северный',         'Мира',    '12'),
+(3, 2, 1, 'Санкт-Петербург', 'Василеостровский', 'Большой', '33');
+
+
+-- ============================================================
+--  EMPLOYEES
+-- ============================================================
+
+INSERT INTO employee (id, person_id, branch_id, salary, date_of_employment) VALUES
+(1, '34567890123', 1, 90000.00, '2020-01-15'),  -- Алексей → филиал 1
+(2, '45678901234', 1, 65000.00, '2021-03-01'),  -- Дмитрий → филиал 1
+(3, '56789012345', 1, 62000.00, '2022-06-15'),  -- Сергей  → филиал 1
+(4, '33456789012', 2, 85000.00, '2019-08-01'),  -- Николай → филиал 2
+(5, '55678901234', 2, 68000.00, '2021-11-20');  -- Виктор  → филиал 2
+
+UPDATE auto_repair_shop_branch SET manager_id = 1 WHERE id = 1;
+UPDATE auto_repair_shop_branch SET manager_id = 4 WHERE id = 2;
+
+INSERT INTO mechanic (id, specialty, rank) VALUES
+(2, 'Тормозная система',       5),  -- Дмитрий
+(3, 'Ходовая часть',           4),  -- Сергей
+(5, 'Электрика и электроника', 6);  -- Виктор
+
+
+-- ============================================================
+--  CLIENTS
+-- ============================================================
+
+INSERT INTO client (person_id, registration_date) VALUES
+('12345678901', '2024-01-10'),  -- id=1  Иван
+('23456789012', '2024-01-15'),  -- id=2  Мария
+('67890123456', '2024-02-01'),  -- id=3  Анна
+('78901234567', '2024-02-15'),  -- id=4  Павел
+('89012345678', '2024-03-01'),  -- id=5  Елена
+('90123456789', '2024-03-10'),  -- id=6  Михаил
+('01234567890', '2024-03-20'),  -- id=7  Ольга
+('11234567890', '2024-04-01'),  -- id=8  Андрей
+('22345678901', '2024-04-15'),  -- id=9  Татьяна
+('44567890123', '2024-05-01');  -- id=10 Юлия
+
+
+-- ============================================================
+--  INVENTORY
+-- ============================================================
+
 INSERT INTO inventory (branch_id, detail_id, quantity) VALUES
-(1,1,3),  -- engines
-(1,2,10); -- brakes
+(1, 1,  5),   -- id=1  филиал 1 — тормозной диск
+(1, 2,  8),   -- id=2  филиал 1 — тормозные колодки
+(1, 3,  15),  -- id=3  филиал 1 — масляный фильтр
+(1, 4,  10),  -- id=4  филиал 1 — воздушный фильтр
+(1, 5,  6),   -- id=5  филиал 1 — свечи зажигания
+(1, 6,  3),   -- id=6  филиал 1 — амортизатор
+(1, 7,  4),   -- id=7  филиал 1 — ступичный подшипник
+(1, 8,  2),   -- id=8  филиал 1 — ремень ГРМ
+(2, 1,  3),   -- id=9  филиал 2 — тормозной диск
+(2, 6,  2),   -- id=10 филиал 2 — амортизатор
+(2, 9,  4),   -- id=11 филиал 2 — тормозной диск Tesla
+(2, 10, 1),   -- id=12 филиал 2 — модуль батареи Tesla
+(3, 3,  20),  -- id=13 филиал 3 — масляный фильтр
+(3, 4,  12);  -- id=14 филиал 3 — воздушный фильтр
+
+
+-- ============================================================
+--  BRANCH BUDGET (начальный баланс)
+-- ============================================================
+
+INSERT INTO branch_budget (branch_id, balance) VALUES
+(1, 0.00),
+(2, 0.00),
+(3, 0.00);
+
+
+-- ============================================================
+--  REQUESTS
+-- ============================================================
+
+INSERT INTO request (client_id, branch_id, VIN, description, request_date, status) VALUES
+(1, 1, '1HGBH41JXMN109186', 'Скрипят тормоза при торможении',          '2024-03-15', 'completed'),   -- id=1  Иван, своя Camry
+(2, 1, '1HGBH41JXMN109186', 'Плановое ТО, замена фильтров',            '2024-04-01', 'completed'),   -- id=2  Мария привезла Camry Ивана
+(3, 1, '2T1BURHE0JC043821', 'Скрипят тормоза, нужна диагностика',      '2024-04-10', 'completed'),   -- id=3  Анна, BMW 3 Series
+(4, 1, '1FADP3F28DL235478', 'Стук в двигателе, замена ремня ГРМ',      '2024-04-20', 'completed'),   -- id=4  Павел, Ford Focus
+(5, 1, 'WDDGF4HB8CA578432', 'Пробит амортизатор, машину ведёт',        '2024-05-01', 'in_progress'), -- id=5  Елена, Mercedes C-Class
+(6, 1, '2T1KR32E15C403203', 'ТО: масло + подшипник',                   '2024-05-05', 'completed'),   -- id=6  Михаил, Toyota Corolla
+(7, 2, 'WBANU31060CT03510', 'Замена тормозных дисков BMW X5',           '2024-05-10', 'in_progress'), -- id=7  Ольга, BMW X5
+(8, 2, '5YJXCAE26GF012345', 'Замена тормозных дисков Tesla Model X',   '2024-05-15', 'completed'),   -- id=8  Андрей, Tesla Model X
+(9, 1, '4T1BF3EK7AU128828', 'Плановый осмотр перед летом',             '2024-05-20', 'pending'),     -- id=9  Татьяна, Toyota Camry
+(10,2, '5YJ3E1EA8JF006789', 'Диагностика тормозной системы',           '2024-05-25', 'pending');     -- id=10 Юлия, Tesla Model 3
+
+
+-- ============================================================
+--  WORK ORDERS (только для non-pending)
+-- ============================================================
+
+INSERT INTO work_order (request_id, date_of_assignment, completion_date) VALUES
+(1, '2024-03-15', '2024-03-16'),  -- id=1
+(2, '2024-04-01', '2024-04-02'),  -- id=2
+(3, '2024-04-10', '2024-04-11'),  -- id=3
+(4, '2024-04-20', '2024-04-21'),  -- id=4
+(5, '2024-05-01', NULL),          -- id=5  ещё не завершён
+(6, '2024-05-05', '2024-05-07'),  -- id=6
+(7, '2024-05-10', NULL),          -- id=7  ещё не завершён
+(8, '2024-05-15', '2024-05-16');  -- id=8
+
+
+-- ============================================================
+--  SERVICES
+-- ============================================================
+
+INSERT INTO service (work_order_id, name, price) VALUES
+(1, 'Замена тормозных дисков',         4500.00),  -- id=1  WO1: Camry Ивана
+(1, 'Замена тормозных колодок',        2000.00),  -- id=2  WO1: Camry Ивана
+(2, 'Замена масляного фильтра',         800.00),  -- id=3  WO2: Camry (Мария)
+(2, 'Замена воздушного фильтра',        600.00),  -- id=4  WO2: Camry (Мария)
+(3, 'Замена тормозных дисков',         5000.00),  -- id=5  WO3: BMW 3 Series
+(3, 'Замена свечей зажигания',         1500.00),  -- id=6  WO3: BMW 3 Series
+(4, 'Замена ремня ГРМ',               3500.00),  -- id=7  WO4: Ford Focus
+(5, 'Замена амортизаторов передних',  6000.00),  -- id=8  WO5: Mercedes C-Class
+(6, 'Замена масляного фильтра',         800.00),  -- id=9  WO6: Toyota Corolla
+(6, 'Замена ступичного подшипника',   3000.00),  -- id=10 WO6: Toyota Corolla
+(7, 'Замена тормозных дисков',         5500.00),  -- id=11 WO7: BMW X5
+(8, 'Замена тормозных дисков Tesla',  12000.00); -- id=12 WO8: Tesla Model X
+
+
+-- ============================================================
+--  EXECUTION
+-- ============================================================
+
+INSERT INTO execution (mechanic_id, service_id, date_start, date_end) VALUES
+-- Дмитрий (id=2) — тормозная система
+(2, 1,  '2024-03-15', '2024-03-15'),
+(2, 2,  '2024-03-16', '2024-03-16'),
+(2, 5,  '2024-04-10', '2024-04-10'),
+(2, 11, '2024-05-10', '2024-05-11'),
+-- Сергей (id=3) — ходовая часть
+(3, 3,  '2024-04-01', '2024-04-01'),
+(3, 4,  '2024-04-02', '2024-04-02'),
+(3, 7,  '2024-04-20', '2024-04-21'),
+(3, 8,  '2024-05-01', '2024-05-02'),
+(3, 9,  '2024-05-06', '2024-05-06'),
+(3, 10, '2024-05-07', '2024-05-07'),
+-- Виктор (id=5) — электрика
+(5, 6,  '2024-04-11', '2024-04-11'),
+(5, 12, '2024-05-15', '2024-05-16');
+
+
+-- ============================================================
+--  DETAIL USAGE
+-- ============================================================
+
+INSERT INTO detail_usage (service_id, inventory_id, quantity) VALUES
+(1,  1,  2),  -- диски        → Toyota Camry,     inv=1  (BSD001,   branch 1)
+(2,  2,  1),  -- колодки      → Toyota Camry,     inv=2  (BPD001,   branch 1)
+(3,  3,  1),  -- масл. фильтр → Toyota Camry,     inv=3  (OLF001,   branch 1)
+(4,  4,  1),  -- возд. фильтр → Toyota Camry,     inv=4  (ARF001,   branch 1)
+(5,  1,  2),  -- диски        → BMW 3 Series,     inv=1  (BSD001,   branch 1)
+(6,  5,  1),  -- свечи        → BMW 3 Series,     inv=5  (SPK001,   branch 1)
+(7,  8,  1),  -- ремень ГРМ   → Ford Focus,       inv=8  (TBL001,   branch 1)
+(8,  6,  2),  -- амортизатор  → Mercedes C-Class, inv=6  (SHK001,   branch 1)
+(9,  3,  1),  -- масл. фильтр → Toyota Corolla,   inv=3  (OLF001,   branch 1)
+(10, 7,  1),  -- подшипник    → Toyota Corolla,   inv=7  (WBR001,   branch 1)
+(11, 9,  2),  -- диски        → BMW X5,           inv=9  (BSD001,   branch 2)
+(12, 11, 2);  -- Tesla диски  → Tesla Model X,    inv=11 (TSLBR001, branch 2)
+
+
+-- ============================================================
+--  INVOICES (total_amount считается триггером автоматически)
+-- ============================================================
+
+INSERT INTO invoice (request_id, issued_date, due_date, status) VALUES
+(1, '2024-03-16', '2024-03-23', 'paid'),      -- id=1  Иван,    6500.00
+(2, '2024-04-02', '2024-04-09', 'paid'),      -- id=2  Мария,   1400.00
+(3, '2024-04-11', '2024-04-18', 'paid'),      -- id=3  Анна,    6500.00
+(4, '2024-04-21', '2024-04-28', 'paid'),      -- id=4  Павел,   3500.00
+(6, '2024-05-07', '2024-05-14', 'paid'),      -- id=5  Михаил,  3800.00
+(8, '2024-05-16', '2024-05-23', 'paid');      -- id=6  Андрей, 12000.00
+
+
+-- ============================================================
+--  PAYMENTS (пополняют branch_budget через триггер)
+-- ============================================================
+
+INSERT INTO payment (invoice_id, amount, payment_date, payment_method) VALUES
+(1, 6500.00,  '2024-03-16', 'card'),          -- Иван оплатил полностью
+(2, 700.00,   '2024-04-02', 'cash'),          -- Мария, первая половина
+(2, 700.00,   '2024-04-05', 'cash'),          -- Мария, вторая половина
+(3, 6500.00,  '2024-04-11', 'card'),          -- Анна оплатила полностью
+(4, 3500.00,  '2024-04-21', 'bank_transfer'), -- Павел оплатил полностью
+(5, 3800.00,  '2024-05-07', 'card'),          -- Михаил оплатил полностью
+(6, 12000.00, '2024-05-16', 'card');          -- Андрей оплатил полностью
+
+
+-- ============================================================
+--  DETAIL ORDERS (статус confirmed спишет деньги с бюджета)
+-- ============================================================
+
+INSERT INTO detail_order (branch_id, supplier_id, detail_id, quantity, order_date, status) VALUES
+(1, 1, 1,  4, '2024-05-17', 'pending'),    -- Bosch       → диски,          филиал 1
+(1, 2, 6,  5, '2024-05-17', 'pending'),    -- Febi        → амортизаторы,   филиал 1
+(2, 5, 9,  6, '2024-05-18', 'pending'),    -- Tesla Parts → Tesla диски,    филиал 2
+(1, 4, 3, 20, '2024-05-18', 'pending');    -- Denso       → масл. фильтры,  филиал 1
+
+-- подтверждаем первый заказ — триггер проверит бюджет и спишет деньги
+UPDATE detail_order SET status = 'confirmed' WHERE id = 1;
+-- 4 диска * 5000.00 = 20000.00 ≤ 21700.00 → пройдёт, остаток 1700.00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ============================================================
+--  CORRECTED EXPANDED TEST DATA (run after original script)
+--  Fixes NULL inventory_id and zero quantity errors.
+-- ============================================================
+
+-- ============================================================
+--  MORE PERSONS
+-- ============================================================
+INSERT INTO person (id, last_name, first_name, middle_name, birth_date, city, district, street, building, flat_number) VALUES
+('66778899001', 'Федоров',   'Максим',   'Игоревич',    '1992-08-14', 'Москва',          'Южный',        'Луговая',    '8',  '21'),
+('77889900223', 'Егорова',   'Наталья',  'Владимировна', '1985-12-01', 'Санкт-Петербург', 'Адмиралтейский','Садовая',    '24', '5'),
+('88990033445', 'Соловьев',  'Денис',    'Андреевич',    '1999-03-22', 'Казань',          'Вахитовский',   'Баумана',    '10', '32'),
+('99001144556', 'Тихонова',  'Ирина',    'Павловна',     '1975-06-10', 'Екатеринбург',    'Ленинский',     'Малышева',   '50', '8'),
+('10111222333', 'Никитин',   'Артём',    'Сергеевич',    '1982-11-02', 'Новосибирск',     'Центральный',   'Красный пр','15', '44');
+
+-- ============================================================
+--  MORE CLIENTS
+-- ============================================================
+INSERT INTO client (person_id, registration_date) VALUES
+('66778899001', '2024-06-01'),  -- id 11
+('77889900223', '2024-06-05'),  -- 12
+('88990033445', '2024-06-10'),  -- 13
+('99001144556', '2024-06-15'),  -- 14
+('10111222333', '2024-06-20');  -- 15
+
+-- ============================================================
+--  MORE VEHICLE MODELS & VEHICLES
+-- ============================================================
+INSERT INTO vehicle_model (id, company_id, name) VALUES
+(9,  2, 'X3'),
+(10, 4, 'Mustang'),
+(11, 3, 'E-Class');
+
+INSERT INTO vehicle (VIN, owner_id, model_id, year, license_plate) VALUES
+('1HGCM82633A123456', '66778899001', 1, 2015, 'А001ВВ77'),
+('WBA8F9C58JG123456', '77889900223', 9, 2020, 'В002СС78'),
+('1FA6P8CF0K5123456', '88990033445', 10, 2019, 'Е003ММ116'),
+('WDD2120402A123456', '99001144556', 11, 2018, 'К004ТТ96'),
+('5YJSA1E22HF123456', '10111222333', 7, 2017, 'Х005РР77');
+
+-- ============================================================
+--  INVENTORY ADDITIONS (MUST be done BEFORE detail_usage)
+--  Explicitly capture IDs for later use (or use subqueries)
+-- ============================================================
+-- Branch 3 gets additional stock
+INSERT INTO inventory (branch_id, detail_id, quantity) VALUES
+(3, 5, 4),   -- spark plugs
+(3, 6, 2),   -- shock absorbers
+(3, 8, 3),   -- timing belt
+(3, 7, 5),   -- wheel bearing
+(3, 1, 10),  -- brake discs (for service 15)
+(3, 2, 15),  -- brake pads (for service 16)
+(1, 9, 2);   -- Tesla discs in branch 1
+
+-- Optional: add zero stock (won't be used in detail_usage, just for testing)
+INSERT INTO inventory (branch_id, detail_id, quantity) VALUES
+(3, 10, 0)   -- zero stock of Tesla battery module
+ON CONFLICT DO NOTHING;
+
+-- ============================================================
+--  MORE EMPLOYEES & MECHANICS
+-- ============================================================
+INSERT INTO employee (id, person_id, branch_id, salary, date_of_employment, date_of_disemployment) VALUES
+(6, '90123456789', 3, 72000.00, '2018-07-10', NULL),
+(7, '11234567890', 3, 58000.00, '2022-09-01', NULL),
+(8, '66778899001', 3, 95000.00, '2020-01-20', '2023-12-31');
+
+INSERT INTO mechanic (id, specialty, rank) VALUES
+(6, 'Двигатель', 6),
+(7, 'Тормозная система', 4);
+
+UPDATE auto_repair_shop_branch SET manager_id = 6 WHERE id = 3;
+
+-- ============================================================
+--  REQUESTS
+-- ============================================================
+INSERT INTO request (client_id, branch_id, VIN, description, request_date, status) VALUES
+(11, 3, '1HGCM82633A123456', 'Плохо заводится, замена свечей',            '2024-06-10', 'completed'),   -- id 11
+(12, 3, 'WBA8F9C58JG123456', 'Стук в передней подвеске',                  '2024-06-12', 'in_progress'), -- id 12
+(13, 2, '1FA6P8CF0K5123456', 'Замена масла и фильтров',                   '2024-06-15', 'pending'),     -- id 13
+(14, 1, 'WDD2120402A123456', 'Проверка тормозов перед летом',             '2024-06-18', 'cancelled'),   -- id 14
+(15, 2, '5YJSA1E22HF123456', 'Замена аккумулятора 12В',                   '2024-06-20', 'pending'),     -- id 15
+(1,  1, '1HGBH41JXMN109186', 'Регулярное ТО (повторно)',                  '2024-06-22', 'in_progress'), -- id 16
+(5,  1, 'WDDGF4HB8CA578432', 'Доделать амортизаторы (продолжение)',       '2024-06-25', 'pending');     -- id 17
+
+-- ============================================================
+--  WORK ORDERS
+-- ============================================================
+INSERT INTO work_order (request_id, date_of_assignment, completion_date) VALUES
+(11, '2024-06-10', '2024-06-11'),  -- id 9
+(12, '2024-06-12', NULL),          -- id 10
+(16, '2024-06-22', NULL),          -- id 11
+(17, '2024-06-25', NULL);          -- id 12
+
+-- ============================================================
+--  SERVICES (with reasonable prices)
+-- ============================================================
+INSERT INTO service (work_order_id, name, price) VALUES
+(9,  'Замена свечей зажигания',         1800.00), -- id 13
+(9,  'Диагностика системы зажигания',   1200.00), -- id 14
+(10, 'Замена стоек стабилизатора',      2500.00), -- id 15
+(10, 'Развал-схождение',                2000.00), -- id 16
+(11, 'Замена масла',                    1000.00), -- id 17
+(11, 'Замена масляного фильтра',         800.00), -- id 18
+(11, 'Замена воздушного фильтра',        600.00), -- id 19
+(12, 'Замена амортизаторов (левые)',    7000.00), -- id 20
+(12, 'Регулировка фар',                  500.00); -- id 21
+
+-- ============================================================
+--  EXECUTION (mechanic assignments)
+-- ============================================================
+INSERT INTO execution (mechanic_id, service_id, date_start, date_end) VALUES
+(7, 13, '2024-06-10', '2024-06-10'),
+(6, 14, '2024-06-11', '2024-06-11'),
+(7, 15, '2024-06-13', '2024-06-13'),
+(6, 16, '2024-06-14', '2024-06-14'),
+(2, 17, '2024-06-22', '2024-06-22'),
+(2, 18, '2024-06-22', '2024-06-22'),
+(2, 19, '2024-06-23', '2024-06-23'),
+(6, 20, '2024-06-26', NULL),
+(7, 21, '2024-06-26', '2024-06-26');
+
+-- ============================================================
+--  DETAIL USAGE (now inventory already exists, use subqueries)
+--  All subqueries return non‑NULL because inventory was added above.
+-- ============================================================
+INSERT INTO detail_usage (service_id, inventory_id, quantity) VALUES
+(13, (SELECT id FROM inventory WHERE branch_id=3 AND detail_id=5 LIMIT 1), 1),   -- spark plugs
+(15, (SELECT id FROM inventory WHERE branch_id=3 AND detail_id=1 LIMIT 1), 2),   -- brake discs (for suspension test)
+(16, (SELECT id FROM inventory WHERE branch_id=3 AND detail_id=2 LIMIT 1), 1),   -- brake pads
+(17, (SELECT id FROM inventory WHERE branch_id=1 AND detail_id=3 LIMIT 1), 1),   -- oil filter branch1
+(18, (SELECT id FROM inventory WHERE branch_id=1 AND detail_id=3 LIMIT 1), 1),   -- same
+(19, (SELECT id FROM inventory WHERE branch_id=1 AND detail_id=4 LIMIT 1), 1),   -- air filter
+(20, (SELECT id FROM inventory WHERE branch_id=1 AND detail_id=6 LIMIT 1), 2);   -- shock absorbers
+
+-- Service 14 (diagnostics) uses no parts, so no entry.
+-- Service 21 (light adjustment) uses no parts.
+
+-- ============================================================
+--  INVOICES (only for requests with work orders and non‑pending)
+-- ============================================================
+INSERT INTO invoice (request_id, issued_date, due_date, status) VALUES
+(11, '2024-06-11', '2024-06-18', 'issued'),   -- total 3000
+(12, '2024-06-14', '2024-06-21', 'overdue'),  -- total 4500
+(16, '2024-06-22', '2024-06-29', 'issued'),   -- total 2400
+(17, '2024-06-25', '2024-07-02', 'issued');   -- total 7500
+
+-- ============================================================
+--  PAYMENTS (partial, split, overdue scenario)
+-- ============================================================
+INSERT INTO payment (invoice_id, amount, payment_date, payment_method) VALUES
+((SELECT id FROM invoice WHERE request_id=11), 1500.00, '2024-06-12', 'cash'),
+((SELECT id FROM invoice WHERE request_id=11), 1500.00, '2024-06-15', 'card'),
+((SELECT id FROM invoice WHERE request_id=12), 2000.00, '2024-06-16', 'bank_transfer'),
+((SELECT id FROM invoice WHERE request_id=16), 2400.00, '2024-06-23', 'card');
+
+-- ============================================================
+--  DETAIL ORDERS (testing budget triggers)
+-- ============================================================
+INSERT INTO detail_order (branch_id, supplier_id, detail_id, quantity, order_date, status) VALUES
+(3, 1, 1, 10, '2024-06-25', 'pending'),      -- id 5
+(3, 2, 2, 15, '2024-06-25', 'pending'),      -- id 6
+(1, 4, 3, 10, '2024-06-27', 'pending'),      -- id 7 (small order)
+(2, 5, 10, 2, '2024-06-26', 'pending'),      -- id 8
+(3, 2, 8, 1, '2024-06-28', 'pending');       -- id 9 (timing belt)
+
+-- Confirm orders that should succeed (budget dependent)
+-- Branch 1 balance after original payments ~33700 -20000 (original confirmed) =13700.
+-- 10 oil filters *600 =6000 <13700 → OK.
+UPDATE detail_order SET status = 'confirmed' WHERE id = 7;
+
+-- Branch 3 after payments: invoice 11 paid 3000 → balance 3000.
+-- Timing belt (id 9) cost: detail 8 with supplier 2 =2800 <3000 → OK.
+UPDATE detail_order SET status = 'confirmed' WHERE id = 9;
+
+-- Set other statuses for variety
+UPDATE detail_order SET status = 'shipped' WHERE id = 6;
+UPDATE detail_order SET status = 'delivered' WHERE id = 8;
+UPDATE detail_order SET status = 'cancelled' WHERE id = 5;
+
+-- ============================================================
+--  BRANCH BUDGET MANUAL ADJUSTMENT (optional, for testing)
+-- ============================================================
+INSERT INTO branch_budget (branch_id, balance) VALUES
+(2, 5000.00) ON CONFLICT (branch_id) DO UPDATE SET balance = branch_budget.balance + 5000.00;
